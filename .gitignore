@@ -1,0 +1,12 @@
+# Ignore raw data files (GitHub has a 100MB limit, and our data is huge!)
+data/
+*.csv
+*.parquet
+
+# Ignore virtual environments and Python cache
+venv/
+__pycache__/
+
+# Ignore Jupyter Notebook temp files
+.ipynb_checkpoints/
+
