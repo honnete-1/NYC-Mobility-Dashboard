@@ -1,4 +1,4 @@
-# Import the libraries we need for pandas, pyarrow, and JSON logging
+# Import the libraries i need for pandas, pyarrow, and JSON logging
 import pandas as pd
 import numpy as np
 import pyarrow as pa
