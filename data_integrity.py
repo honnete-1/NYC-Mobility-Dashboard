@@ -183,7 +183,7 @@ print("\nCounts for each type of anomaly:")
 for k, v in anomaly_counts.items():
     print(f" - {k:22}: {v:,} rows ({v/initial_row_count*100:.4f}%)")
 
-print("\nLoading cleaned Parquet file to verify results...")
+print("Loading cleaned Parquet file to verify results...")
 df_verified = pd.read_parquet(parquet_path)
 
 # Verify nulls and key-column duplicates match what verify_clean_data.py checks
@@ -200,4 +200,3 @@ print(f"Trip Distance range: {df_verified['trip_distance'].min():.2f} to {df_ver
 print(f"Fare Amount range: ${df_verified['fare_amount'].min():.2f} to ${df_verified['fare_amount'].max():.2f}")
 print(f"Total Amount range: ${df_verified['total_amount'].min():.2f} to ${df_verified['total_amount'].max():.2f}")
 print(f"Passenger Count range: {df_verified['passenger_count'].min()} to {df_verified['passenger_count'].max()}")
-
