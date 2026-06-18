@@ -1,12 +1,22 @@
-# Ignore raw data files (GitHub has a 100MB limit, and our data is huge!)
-data/
-*.csv
-*.parquet
+# Ignore large data files and raw shapefiles
+data/yellow_tripdata.csv
+data/yellow_tripdata_clean.parquet
+data/yellow_tripdata_final.parquet
+data/nyc_mobility.db
+data/taxi_zones/
 
-# Ignore virtual environments and Python cache
+# Ignore Python dependencies and caches
 venv/
 __pycache__/
+*.pyc
 
-# Ignore Jupyter Notebook temp files
+# Ignore editor and temporary files
 .ipynb_checkpoints/
+.vscode/
+.idea/
 
+# Explicitly allow deployment assets (JSON cache, logs, lookups, and deploy database) to be pushed
+!data/dashboard_cache.json
+!data/data_cleaning_log.json
+!data/taxi_zone_lookup.csv
+!data/nyc_mobility_deploy.db

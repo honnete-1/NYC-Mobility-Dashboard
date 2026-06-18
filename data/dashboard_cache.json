@@ -1,0 +1,195 @@
+{
+  "kpis": {
+    "total_trips": 7469260,
+    "avg_fare": 12.17,
+    "avg_tip": 1.82,
+    "avg_tip_percent": 15.66,
+    "avg_speed": 13.13
+  },
+  "hourly_trends": [
+    {
+      "pickup_hour": "00",
+      "total_trips": 202272,
+      "avg_speed_mph": 16.87
+    },
+    {
+      "pickup_hour": "01",
+      "total_trips": 145355,
+      "avg_speed_mph": 17.49
+    },
+    {
+      "pickup_hour": "02",
+      "total_trips": 106316,
+      "avg_speed_mph": 16.51
+    },
+    {
+      "pickup_hour": "03",
+      "total_trips": 75623,
+      "avg_speed_mph": 17.61
+    },
+    {
+      "pickup_hour": "04",
+      "total_trips": 58820,
+      "avg_speed_mph": 20.86
+    },
+    {
+      "pickup_hour": "05",
+      "total_trips": 71823,
+      "avg_speed_mph": 21.78
+    },
+    {
+      "pickup_hour": "06",
+      "total_trips": 171029,
+      "avg_speed_mph": 16.42
+    },
+    {
+      "pickup_hour": "07",
+      "total_trips": 294616,
+      "avg_speed_mph": 13.35
+    },
+    {
+      "pickup_hour": "08",
+      "total_trips": 362871,
+      "avg_speed_mph": 11.12
+    },
+    {
+      "pickup_hour": "09",
+      "total_trips": 355741,
+      "avg_speed_mph": 11.34
+    },
+    {
+      "pickup_hour": "10",
+      "total_trips": 351168,
+      "avg_speed_mph": 11.6
+    },
+    {
+      "pickup_hour": "11",
+      "total_trips": 364759,
+      "avg_speed_mph": 11.29
+    },
+    {
+      "pickup_hour": "12",
+      "total_trips": 389154,
+      "avg_speed_mph": 11.85
+    },
+    {
+      "pickup_hour": "13",
+      "total_trips": 391665,
+      "avg_speed_mph": 12.19
+    },
+    {
+      "pickup_hour": "14",
+      "total_trips": 419340,
+      "avg_speed_mph": 11.75
+    },
+    {
+      "pickup_hour": "15",
+      "total_trips": 437691,
+      "avg_speed_mph": 11.58
+    },
+    {
+      "pickup_hour": "16",
+      "total_trips": 406032,
+      "avg_speed_mph": 12.16
+    },
+    {
+      "pickup_hour": "17",
+      "total_trips": 453762,
+      "avg_speed_mph": 12.33
+    },
+    {
+      "pickup_hour": "18",
+      "total_trips": 501137,
+      "avg_speed_mph": 11.69
+    },
+    {
+      "pickup_hour": "19",
+      "total_trips": 463122,
+      "avg_speed_mph": 12.76
+    },
+    {
+      "pickup_hour": "20",
+      "total_trips": 412490,
+      "avg_speed_mph": 14.08
+    },
+    {
+      "pickup_hour": "21",
+      "total_trips": 399683,
+      "avg_speed_mph": 14.84
+    },
+    {
+      "pickup_hour": "22",
+      "total_trips": 360062,
+      "avg_speed_mph": 15.04
+    },
+    {
+      "pickup_hour": "23",
+      "total_trips": 274729,
+      "avg_speed_mph": 16.04
+    }
+  ],
+  "top_zones": [
+    {
+      "zone_name": "Upper East Side South",
+      "total_trips": 326129
+    },
+    {
+      "zone_name": "Upper East Side North",
+      "total_trips": 316804
+    },
+    {
+      "zone_name": "Midtown Center",
+      "total_trips": 305637
+    },
+    {
+      "zone_name": "Midtown East",
+      "total_trips": 271170
+    },
+    {
+      "zone_name": "Times Sq/Theatre District",
+      "total_trips": 257422
+    },
+    {
+      "zone_name": "Penn Station/Madison Sq West",
+      "total_trips": 253985
+    },
+    {
+      "zone_name": "Clinton East",
+      "total_trips": 235361
+    },
+    {
+      "zone_name": "Murray Hill",
+      "total_trips": 233791
+    },
+    {
+      "zone_name": "Union Sq",
+      "total_trips": 232684
+    },
+    {
+      "zone_name": "Lincoln Square East",
+      "total_trips": 230241
+    }
+  ],
+  "tipping_trends": [
+    {
+      "payment_name": "Credit card",
+      "total_trips": 5365330,
+      "avg_tip_percent": 21.8
+    },
+    {
+      "payment_name": "Cash",
+      "total_trips": 2074244,
+      "avg_tip_percent": 0.0
+    },
+    {
+      "payment_name": "No charge",
+      "total_trips": 22773,
+      "avg_tip_percent": 0.01
+    },
+    {
+      "payment_name": "Dispute",
+      "total_trips": 6913,
+      "avg_tip_percent": 0.04
+    }
+  ]
+}
