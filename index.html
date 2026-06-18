@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- HTML layout code for our taxi analytics dashboard -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYC Taxi Trends & Averages Dashboard</title>
+    
+    <!-- Load clean Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Load ApexCharts CDN for visual charts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    
+    <!-- Import our custom styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+
+    <div class="app-container">
+        
+        <!-- Header Section -->
+        <header class="dashboard-header">
+            <div class="header-logo">
+                <div>
+                    <h1>NYC Taxi Analysis Dashboard</h1>
+                    <p class="subtitle">Class project analyzing 7.4M rides in January 2019</p>
+                </div>
+            </div>
+            
+            <!-- Controls (Filters + Theme Toggle) -->
+            <div class="header-controls">
+                <!-- Filter Panel -->
+                <div class="filter-panel">
+                    <div class="filter-group">
+                        <label for="filter-borough">Select Borough</label>
+                        <select id="filter-borough">
+                            <option value="All">All Boroughs</option>
+                            <option value="Manhattan">Manhattan</option>
+                            <option value="Brooklyn">Brooklyn</option>
+                            <option value="Queens">Queens</option>
+                            <option value="Bronx">Bronx</option>
+                            <option value="Staten Island">Staten Island</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="filter-hour-min">Hour Range</label>
+                        <div class="hour-range-selects">
+                            <select id="filter-hour-min">
+                                <!-- Populated dynamically by JS -->
+                            </select>
+                            <span>to</span>
+                            <select id="filter-hour-max">
+                                <!-- Populated dynamically by JS -->
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="filter-ratecode">Rate Type</label>
+                        <select id="filter-ratecode">
+                            <option value="All">All Rates</option>
+                            <option value="1">Standard Rate</option>
+                            <option value="2">JFK Airport</option>
+                            <option value="3">Newark Airport</option>
+                            <option value="4">Nassau/Westchester</option>
+                            <option value="5">Negotiated Fare</option>
+                            <option value="6">Group Ride</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Dropdown Button for Apply Filters -->
+                    <div class="dropdown-button-container">
+                        <button id="apply-filters-btn" class="apply-btn dropdown-toggle" title="Click to view actions and quick presets.">
+                            Apply Filters <span class="arrow">&#9662;</span>
+                        </button>
+                        <div id="apply-dropdown-menu" class="dropdown-menu">
+                            <button id="action-apply" class="dropdown-item">Apply Current Filters</button>
+                            <button id="action-reset" class="dropdown-item">Reset to Defaults</button>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-header">Quick Presets</div>
+                            <button id="preset-morning" class="dropdown-item">Manhattan Morning Rush (7-9 AM)</button>
+                            <button id="preset-evening" class="dropdown-item">Manhattan Evening Rush (4-6 PM)</button>
+                            <button id="preset-jfk" class="dropdown-item">JFK Airport Runs</button>
+                            <button id="preset-newark" class="dropdown-item">Newark Airport Runs</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Theme Switcher with two circles -->
+                    <div class="theme-switcher">
+                        <button id="theme-light-btn" class="theme-circle-btn light-btn-icon" aria-label="Light Mode"></button>
+                        <button id="theme-dark-btn" class="theme-circle-btn dark-btn-icon active" aria-label="Dark Mode"></button>
+                        <span id="theme-mode-label" class="theme-label">Dark Mode</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- KPI Grid Row -->
+        <section class="kpi-grid">
+            <!-- Card 1: Total Volume -->
+            <div class="kpi-card border-imperial">
+                <div class="kpi-content">
+                    <span class="kpi-label">Total Rides</span>
+                    <h3 id="kpi-total-rides">-</h3>
+                </div>
+            </div>
+
+            <!-- Card 2: Average Fare -->
+            <div class="kpi-card border-french">
+                <div class="kpi-content">
+                    <span class="kpi-label">Average Fare</span>
+                    <h3 id="kpi-avg-fare">-</h3>
+                </div>
+            </div>
+
+            <!-- Card 3: Avg Tip % -->
+            <div class="kpi-card border-gold">
+                <div class="kpi-content">
+                    <span class="kpi-label">Average Tip</span>
+                    <h3 id="kpi-avg-tip-percent">-</h3>
+                </div>
+            </div>
+
+            <!-- Card 4: Avg Speed -->
+            <div class="kpi-card border-steel">
+                <div class="kpi-content">
+                    <span class="kpi-label">Average Speed</span>
+                    <h3 id="kpi-avg-speed">-</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Visualizations Grid -->
+        <main class="dashboard-grid">
+            
+            <!-- Left Side: Large Chart (Hourly Speed & Congestion) -->
+            <div class="chart-card span-col-2">
+                <div class="card-header">
+                    <h4>Hourly Trips and Average Speed</h4>
+                    <p class="card-subtitle">How taxi speeds drop when the total number of rides peaks during rush hour</p>
+                </div>
+                <div class="chart-container">
+                    <div id="hourly-trends-chart"></div>
+                </div>
+            </div>
+
+            <!-- Right Side: Busiest Locations -->
+            <div class="chart-card">
+                <div class="card-header">
+                    <h4>Top 10 Pickup Neighborhoods</h4>
+                    <p class="card-subtitle">The zones in NYC with the highest number of passenger pickups</p>
+                </div>
+                <div class="chart-container">
+                    <div id="top-zones-chart"></div>
+                </div>
+            </div>
+
+            <!-- Bottom Left: Tipping behavior by Payment -->
+            <div class="chart-card">
+                <div class="card-header">
+                    <h4>Tip Percentages by Payment Method</h4>
+                    <p class="card-subtitle">How much people tip when paying with credit cards vs cash or other methods</p>
+                </div>
+                <div class="chart-container">
+                    <div id="tipping-trends-chart"></div>
+                </div>
+            </div>
+
+            <!-- Bottom Right: Project Information and Insights -->
+            <div class="chart-card span-col-2 info-card relative-card">
+                <div class="card-bg-image"></div>
+                <div class="card-header">
+                    <h4>Key Project Findings & Takeaways</h4>
+                    <p class="card-subtitle">Some interesting economic and mobility trends we found in the data</p>
+                </div>
+                <div class="info-content">
+                    <div class="insight-item">
+                        <div>
+                            <h5>Traffic slows down a lot during rush hour</h5>
+                            <p>We found that average taxi speeds drop to around 11 MPH during the morning (8 AM) and evening (6 PM) rush hours because of high traffic. The best time to drive is early morning (5 AM) where speeds go up to 21 MPH.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="insight-item">
+                        <div>
+                            <h5>Card payments are best for tips</h5>
+                            <p>People who pay with credit cards tip about 21.8% on average. Cash trips show 0% tips in the data, which is probably because cash tips aren't recorded in the system, or people don't tip with cash as much.</p>
+                        </div>
+                    </div>
+
+                    <div class="insight-item">
+                        <div>
+                            <h5>Airport runs are highly profitable</h5>
+                            <p>Trips starting or ending at airports (like JFK) have the highest fares and longest distances. These are the most profitable trips for drivers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <p>&copy;2026 NYC Taxi Project</p>
+        </footer>
+
+    </div>
+
+    <!-- Import our custom javascript logic -->
+    <script src="app.js"></script>
+</body>
+</html>
