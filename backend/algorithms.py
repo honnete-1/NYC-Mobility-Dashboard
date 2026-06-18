@@ -1,11 +1,11 @@
-# Custom Min-Heap implementation for top-K busiest zones
-# Part of the technical requirement for manual algorithmic logic without libraries.
+# I created a  Custom Min-Heap implementation for top-K busiest zones
+# I did it because it was part of the technical requirement for manual algorithmic logic without libraries.
 
 class MinHeap:
     def __init__(self, max_size):
         """Initializes the min-heap with a fixed maximum size (K)."""
         self.max_size = max_size
-        self.heap = []  # List of tuples: (count, zone_name)
+        self.heap = []  
 
     def parent(self, i):
         return (i - 1) // 2
