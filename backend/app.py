@@ -1,5 +1,3 @@
-
-
 # I wrote flask backend code 
 # I set up the server and endpoints for the taxi dashboard
 
@@ -9,16 +7,16 @@ import sqlite3
 import os
 import json
 from algorithms import MinHeap
-import data_integrity
-import normalization_feature_engineering
-import db_loader
 
 app = Flask(__name__)
 # I enabled CORS so our browser page can make api calls without getting blocked
 CORS(app)
 
 # Created database  path 
-DB_PATH = '../data/nyc_mobility_deploy.db' if os.path.exists('../data/nyc_mobility_deploy.db') else '../data/nyc_mobility.db'
+BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
+DEPLOY_DB = os.path.join(BACKEND_DIR, '../data/nyc_mobility_deploy.db')
+FULL_DB = os.path.join(BACKEND_DIR, '../data/nyc_mobility.db')
+DB_PATH = DEPLOY_DB if os.path.exists(DEPLOY_DB) else FULL_DB
 
 
 def get_db_connection():
@@ -32,12 +30,12 @@ def get_db_connection():
 # Served the our index.html page
 @app.route('/')
 def index():
-    return send_from_directory('../frontend', 'index.html')
+    return send_from_directory(os.path.join(BACKEND_DIR, '../Frontend'), 'index.html')
 
 # I Served css and js files
 @app.route('/<path:path>')
 def serve_static(path):
-    return send_from_directory('../frontend', path)
+    return send_from_directory(os.path.join(BACKEND_DIR, '../Frontend'), path)
 
 # here is theAPI endpoint that the javascript page calls
 @app.route('/api/dashboard', methods=['GET'])
@@ -56,7 +54,7 @@ def get_dashboard_data():
                   rate_code == 'All')
                   
     if is_default:
-        cache_path = '../data/dashboard_cache.json'
+        cache_path = os.path.join(BACKEND_DIR, '../data/dashboard_cache.json')
         if os.path.exists(cache_path):
             print("Loading default dashboard data from precomputed cache...")
             with open(cache_path, 'r') as f:
@@ -177,8 +175,13 @@ def get_dashboard_data():
         conn.close()
 
 if __name__ == '__main__':
+    # Move heavy data-engineering imports inside main block to avoid loading them in production/Vercel
+    import data_integrity
+    import normalization_feature_engineering
+    import db_loader
+
     # Automated ETL Pipeline Integration
-    if not os.path.exists('../data/nyc_mobility.db') and not os.path.exists('../data/nyc_mobility_deploy.db'):
+    if not os.path.exists(FULL_DB) and not os.path.exists(DEPLOY_DB):
         print("Database not found! Running data cleaning and processing pipeline...")
         print("Step 1: Data Integrity Cleaning...")
         data_integrity.main()
@@ -191,5 +194,3 @@ if __name__ == '__main__':
     # Eventually  the server is started locally on port 5000
     print("Starting flask server on port 5000...")
     app.run(host='0.0.0.0', port=5000, debug=True)
-
-
