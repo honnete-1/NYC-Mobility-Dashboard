@@ -1,0 +1,554 @@
+/* CSS design system for our taxi analytics dashboard */
+
+:root {
+    /* Default variables set to DARK theme since user requested dark mode by default */
+    --bg-color: #070c18;
+    --text-primary: #e6effa;
+    --text-secondary: #8da2c4;
+    --text-white: #ffffff;
+    --header-bg: rgba(0, 41, 107, 0.25);
+    --card-bg: rgba(0, 63, 136, 0.12);
+    --card-border: rgba(0, 80, 157, 0.25);
+    --card-hover-border: var(--school-bus-yellow);
+    --select-bg: rgba(7, 12, 24, 0.8);
+    --input-border: rgba(0, 80, 157, 0.35);
+    --button-text: #070c18;
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    --bg-image-opacity: 0.12;
+    
+    /* Color Palette - Midnight Sky Colors */
+    --imperial-blue: #00296b;
+    --french-blue: #003f88;
+    --steel-azure: #00509d;
+    --school-bus-yellow: #fdc500;
+    --gold: #ffd500;
+    
+    /* Global Transitions */
+    --transition-smooth: all 0.25s ease;
+}
+
+/* Light Theme Override Variables */
+body.light-theme {
+    --bg-color: #f3f6fa;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-white: #0f172a;
+    --header-bg: #ffffff;
+    --card-bg: #ffffff;
+    --card-border: #e2e8f0;
+    --card-hover-border: #00509d;
+    --select-bg: #ffffff;
+    --input-border: #cbd5e1;
+    --button-text: #0f172a;
+    --shadow: 0 4px 12px rgba(0, 41, 107, 0.05);
+    --bg-image-opacity: 0.05;
+}
+
+/* Reset and Globals */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    transition: var(--transition-smooth);
+    min-height: 100vh;
+}
+
+/* App Container */
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Header Section */
+.dashboard-header {
+    background-color: var(--header-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    box-shadow: var(--shadow);
+}
+
+.header-logo h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-white);
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Controls grouping */
+.header-controls {
+    display: flex;
+    align-items: flex-end; /* Align vertically with dropdown baseline */
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Filter Panel */
+.filter-panel {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.filter-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-group select {
+    background-color: var(--select-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    padding: 0 12px;
+    height: 38px;
+    font-size: 0.85rem;
+    font-family: inherit;
+    min-width: 140px;
+    outline: none;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.filter-group select:hover, .filter-group select:focus {
+    border-color: var(--steel-azure);
+}
+
+.hour-range-selects {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hour-range-selects select {
+    min-width: 75px;
+}
+
+.hour-range-selects span {
+    color: var(--text-secondary);
+}
+
+/* Apply Filter Button */
+.apply-btn {
+    background-color: var(--school-bus-yellow);
+    border: none;
+    border-radius: 6px;
+    color: #070c18;
+    height: 38px;
+    padding: 0 18px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.apply-btn:hover {
+    background-color: var(--gold);
+    transform: translateY(-1px);
+}
+
+/* Dropdown Button Container */
+.dropdown-button-container {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle .arrow {
+    margin-left: 8px;
+    font-size: 0.75rem;
+    display: inline-block;
+    transition: var(--transition-smooth);
+}
+
+.dropdown-toggle.active .arrow {
+    transform: rotate(180deg);
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 6px);
+    background-color: #0d1627;
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    min-width: 260px;
+    display: none;
+    overflow: hidden;
+    padding: 6px 0;
+}
+
+/* Light theme overrides for dropdown menu */
+body.light-theme .dropdown-menu {
+    background-color: #ffffff;
+    border-color: #cbd5e1;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu.show {
+    display: block;
+    animation: dropdownSlideDown 0.18s ease-out;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 10px 16px;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    outline: none;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(253, 197, 0, 0.15);
+    color: var(--school-bus-yellow);
+}
+
+body.light-theme .dropdown-item:hover {
+    background-color: #f1f5f9;
+    color: #00509d;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: var(--card-border);
+    margin: 6px 0;
+}
+
+body.light-theme .dropdown-divider {
+    background-color: #cbd5e1;
+}
+
+.dropdown-header {
+    padding: 6px 16px 4px 16px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: left;
+}
+
+@keyframes dropdownSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Custom Theme Switcher Container (matching user screenshot) */
+.theme-switcher {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--select-bg);
+    border: 2px solid var(--school-bus-yellow); /* Yellowish outline matching active dark circle selection */
+    border-radius: 6px;
+    padding: 0 14px;
+    height: 38px;
+    transition: var(--transition-smooth);
+}
+
+.theme-circle-btn {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    padding: 0;
+    outline: none;
+    display: inline-block;
+}
+
+.light-btn-icon {
+    background-color: #ffffff;
+    border: 2px solid #cbd5e1;
+}
+
+.dark-btn-icon {
+    background-color: #070c18;
+    border: 2px solid #334155;
+}
+
+/* Highlights for active selection */
+.light-btn-icon.active {
+    border: 2px solid var(--steel-azure);
+    box-shadow: 0 0 0 2px rgba(0, 80, 157, 0.25);
+}
+
+.dark-btn-icon.active {
+    border: 2px solid var(--school-bus-yellow);
+    box-shadow: 0 0 0 2px rgba(253, 197, 0, 0.35);
+}
+
+.theme-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    min-width: 75px;
+    text-align: left;
+}
+
+/* KPI Card Grid */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.kpi-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    transition: var(--transition-smooth);
+}
+
+.kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Left Accent Borders (replacing raw icons) */
+.border-imperial {
+    border-left: 5px solid var(--imperial-blue);
+}
+
+.border-french {
+    border-left: 5px solid var(--french-blue);
+}
+
+.border-gold {
+    border-left: 5px solid var(--gold);
+}
+
+.border-steel {
+    border-left: 5px solid var(--steel-azure);
+}
+
+.kpi-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.kpi-label {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.kpi-content h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-white);
+}
+
+/* Charts & Main Layout Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.span-col-2 {
+    grid-column: span 2;
+}
+
+.chart-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: var(--shadow);
+    transition: var(--transition-smooth);
+}
+
+.card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-header h4 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-white);
+}
+
+.card-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.chart-container {
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Dimmed background image findings card */
+.relative-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('nyc_taxi_trails.png');
+    background-size: cover;
+    background-position: center;
+    opacity: var(--bg-image-opacity);
+    pointer-events: none;
+    z-index: 0;
+    transition: var(--transition-smooth);
+}
+
+/* Ensure texts load on top of the background image overlay */
+.relative-card .card-header,
+.relative-card .info-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Insights Info Card */
+.info-card {
+    justify-content: flex-start;
+}
+
+.info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.insight-item {
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--card-border);
+}
+
+.insight-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.insight-item h5 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-white);
+    margin-bottom: 4px;
+}
+
+.insight-item p {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* Footer */
+.dashboard-footer {
+    text-align: center;
+    padding: 20px 0;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--card-border);
+    margin-top: auto;
+}
+
+/* Responsive Overrides */
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .span-col-2 {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .header-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-panel {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-group select {
+        width: 100%;
+    }
+    
+    .apply-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
