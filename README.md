@@ -11,7 +11,7 @@
 
 NYC Urban Mobility is an enterprise-grade full-stack analytics dashboard built to process, clean, and visualize over **7.4 million yellow taxi rides** from New York City in January 2019. The application runs a full ETL pipeline on raw datasets, integrates geospatial metadata from TLC shapefiles, stores clean records in a normalized SQLite database, and serves real-time insights through a Python Flask REST API to a beautifully styled, fully interactive vanilla JavaScript dashboard.
 
-**Live Demo:** [https://nyc-mobility-dashboard.vercel.app/](https://nyc-mobility-dashboard.vercel.app/) &nbsp;|&nbsp; **Video Demo:** [▶ Watch on Loom — Coming Soon](#)
+**Live Demo:** [https://nyc-mobility-dashboard.vercel.app/](https://nyc-mobility-dashboard.vercel.app/) &nbsp;|&nbsp; **Video Demo:** [▶ Watch on Loom](https://www.loom.com/share/095ecb34e576498ba76271d52e835a5b)
 
 ---
 
@@ -82,11 +82,11 @@ NYC_Taxi_Project/
 ├── data/                                     # Data Storage (partially Git-Ignored)
 │   ├── taxi_zones/                           # TLC Shapefiles (Git-Ignored)
 │   ├── taxi_zone_lookup.csv                  # Zone-to-Borough dimension mapping
-│   ├── nyc_mobility_deploy.db               # ✅ 50k-row deployment database (committed)
-│   ├── dashboard_cache.json                  # ✅ Precomputed home view cache (committed)
-│   ├── data_cleaning_log.json                # ✅ Anomaly removal audit log (committed)
-│   ├── yellow_tripdata.csv                   # ❌ Raw data 680MB (Git-Ignored)
-│   └── nyc_mobility.db                       # ❌ Full database 1.4GB (Git-Ignored)
+│   ├── nyc_mobility_deploy.db                #  50k-row deployment database (committed)
+│   ├── dashboard_cache.json                  # Precomputed home view cache (committed)
+│   ├── data_cleaning_log.json                # Anomaly removal audit log (committed)
+│   ├── yellow_tripdata.csv                   # Raw data 680MB (Git-Ignored)
+│   └── nyc_mobility.db                       # Full database 1.4GB (Git-Ignored)
 │
 ├── api/
 │   └── index.py                              # Vercel serverless Python entry point
@@ -269,8 +269,8 @@ Extract the top 10 elements sorted in descending order
 
 | Team Member | Role & Responsibilities |
 | :--- | :--- |
-| **Student A (Honnete)** | Backend development (`app.py`), database schema design (`db_schema.py`), ETL data pipeline, custom Min-Heap algorithm (`algorithms.py`), Vercel deployment |
-| **Student B (Emmanuella)** | Frontend interface (`index.html`, `styles.css`), ApexCharts integration, API integration (`app.js`), Light/Dark theme system |
+| Honnete | Backend development (`app.py`), database schema design (`db_schema.py`), ETL data pipeline, custom Min-Heap algorithm (`algorithms.py`), Vercel deployment |
+| Emmanuella | Frontend interface (`index.html`, `styles.css`), ApexCharts integration, API integration (`app.js`), Light/Dark theme system |
 
 ### What We Learned
 
